@@ -1,0 +1,40 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Leads and Accounts </h1>
+<div class="col-sm-2">
+  <nav class="nav-sidebar">
+
+    <i class="fa fa-user">  <%= link_to 'New Customer', new_customer_path %></i>
+  </nav>
+</div>
+
+<table>
+  <thead>
+  <tr>
+    <th>Name</th>
+    <th>Home Phone</th>
+    <th>Cell Phone</th>
+    <th>Current Status</th>
+    <th colspan="3"></th>
+  </tr>
+  </thead>
+
+  <tbody>
+  <% @customers.each do |customer| %>
+      <tr>
+        <td><%= customer.name %></td>
+        <td><%= customer.home_phone %></td>
+        <td><%= customer.cell_phone %></td>
+        <td>
+          <% if customer.lead %>
+              <div>Lead</div>
+          <% else %>
+              <div>Account</div>
+          <% end %>
+          <td><%= link_to 'Show', customer %></td>
+          <td><%= link_to 'Edit', edit_customer_path(customer) %></td>
+          </tr>
+  <% end %>
+  </tbody>
+</table>
+

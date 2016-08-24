@@ -1,0 +1,43 @@
+<p id="notice"><%= notice %></p>
+
+<%= link_to 'Edit', edit_customer_path(@customer) %> |
+<%= link_to 'Back', customers_path %>
+<td><%= link_to 'Log a Call', new_customer_call_log_path(@customer) %></td>
+<td><%= link_to 'Make an appointment', new_customer_appointment_path(@customer) %></td>
+
+
+<p>
+  <strong>Name:</strong>
+  <%= @customer.name %>
+</p>
+
+<p>
+  <strong>Home phone:</strong>
+  <%= @customer.home_phone %>
+</p>
+
+<p>
+  <strong>Cell phone:</strong>
+  <%= @customer.cell_phone %>
+</p>
+<% if @customer.lead %>
+    <div>Lead
+    <%= link_to 'Convert to account', edit_customer_path(@customer)%> </div>
+<% else %>
+    <div>Account</div>
+<% end %>
+
+
+
+<h2>Call Logs</h2>
+<% @customer.call_logs.each do |call_log| %>
+  <p><%=call_log.calldate %></p>
+    <p><%=call_log.caller %></p>
+    <p><%=call_log.comments %></p>
+<% end %>
+
+<h2>Appointments</h2>
+<% @customer.appointments.each do |appt| %>
+    <p><%=appt.appointment %></p>
+    <p><%=appt.location %></p>
+<% end %>
