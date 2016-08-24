@@ -28,6 +28,7 @@
 .sidebar-nav li {
     text-indent: 20px;
     line-height: 40px;
+    text-decoration: none;
 }
 
 .sidebar-nav li a {
@@ -40,6 +41,7 @@
     text-decoration: none;
     color: #fff;
     background: rgba(255,255,255,0.2);
+    text-decoration: none;
 }
 
 .sidebar-nav li a:active,

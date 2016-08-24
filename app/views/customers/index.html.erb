@@ -1,13 +1,14 @@
 <p id="notice"><%= notice %></p>
 
-<h1>Leads and Accounts </h1>
-<div class="col-sm-2">
-  <nav class="nav-sidebar">
 
-    <i class="fa fa-user">  <%= link_to 'New Customer', new_customer_path %></i>
+<div class="col-md-2">
+  <nav class="nav-sidebar">
+    <div><i class="fa fa-user">  <%= link_to 'New Customer', new_customer_path %></i></div>
+
   </nav>
 </div>
-
+<div class="col-md-10">
+<h1>Leads and Accounts </h1>
 <table>
   <thead>
   <tr>
@@ -37,4 +38,4 @@
   <% end %>
   </tbody>
 </table>
-
+</div>

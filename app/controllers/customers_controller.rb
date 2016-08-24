@@ -35,7 +35,7 @@ class CustomersController < ApplicationController
   # PATCH/PUT /customers/1
   def update
     @customer = Customer.find(params[:id])
-      if @customer.update_attributes(customer_params)
+      if @customer.update(customer_params)
        redirect_to @customer, notice: 'Contact was successfully updated.'
       else
         render :edit
