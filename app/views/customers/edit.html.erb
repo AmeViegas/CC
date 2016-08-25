@@ -10,7 +10,7 @@
       </li>
       <li>
         <i class="fa fa-book" aria-hidden="true">
-          <%= link_to 'Customer Details', @customer %> 
+          <%= link_to 'Customer Details', @customer %>
         </i>
       </li>
       <li>
@@ -25,56 +25,81 @@
       </li>
     </ul>
   </div>
-  <%= form_for(@customer) do |f| %>
-  <div class="row">
-    <% if @customer.errors.any? %>
-        <div id="error_explanation">
-          <h2><%= pluralize(@customer.errors.count, "error") %> prohibited this customer from being saved:</h2>
+  <div class="col-md-8 col-md-offset-1 main">
+    <%= form_for(@customer) do |f| %>
+        <div class="row">
+          <% if @customer.errors.any? %>
+              <div id="error_explanation">
+                <h2><%= pluralize(@customer.errors.count, "error") %> prohibited this customer from being saved:</h2>
 
-          <ul>
-            <% @customer.errors.full_messages.each do |message| %>
-                <li><%= message %></li>
-            <% end %>
-          </ul>
+                <ul>
+                  <% @customer.errors.full_messages.each do |message| %>
+                      <li><%= message %></li>
+                  <% end %>
+                </ul>
+              </div>
+          <% end %>
+        </div>
+        <div class="row">
+          <div class="field">
+            <div class="col-md-3">
+              <%= f.label :name %>
+            </div>
+            <div class="col-md-2">
+              <%= f.text_field :name %>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="field">
+            <div class="col-md-3">
+              <%= f.label :home_phone %>
+            </div>
+            <div class="col-md-2">
+              <%= f.text_field :home_phone %>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="field">
+            <div class="col-md-3">
+              <%= f.label :cell_phone %>
+            </div>
+            <div class="col-md-2">
+              <%= f.text_field :cell_phone %>
+            </div>
+          </div>
+        </div>
+
+        <% if !@customer.account %>
+            <div class="row">
+              <div class="field">
+                <div class="col-md-3">
+                  <%= f.label "Convert to account?" %>
+                </div>
+                <div class="col-md-2">
+                  <%= f.check_box :account %>
+                </div>
+              </div>
+            </div>
+        <% end %>
+        <div class="row ">
+          <div class="col-sm-offset-5 col-md-2 ">
+            <div class="actions" >
+              <%= f.submit %>
+            </div>
+          </div>
+
         </div>
     <% end %>
   </div>
-  <div class="row">
 
-  </div>
 </div>
 
 
 
 
 
-    <div class="field">
-      <%= f.label :name %>
-      <%= f.text_field :name %>
-    </div>
-
-    <div class="field">
-      <%= f.label :home_phone %>
-      <%= f.text_field :home_phone %>
-    </div>
-
-    <div class="field">
-      <%= f.label :cell_phone %>
-      <%= f.text_field :cell_phone %>
-    </div>
-
-
-    <div class="field" id="ck-button">
-        <span>  <%= f.label "Convert_lead?" %>
-          <%= f.check_box :lead %> </span>
-
-    </div>
-
-    <div class="actions">
-      <%= f.submit %>
-    </div>
-<% end %>
 
 
 
-<%= link_to 'Back', customers_path %>

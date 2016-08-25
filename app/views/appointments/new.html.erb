@@ -1,32 +1,80 @@
-<h1>New Appointment</h1>
-<h2>Appointment for <%=@customer.name %></h2>
+<div class="container">
+  <div class="row"><h1> Appointment for <%= @customer.name %> </h1></div>
+  <div class="col-sm-3 col-md-2 sidebar">
+    <ul class="nav nav-sidebar">
 
-<%= form_for([@customer, @appointment]) do |f| %>
+      <li>
+        <i class="fa fa-home" aria-hidden="true">
+          <%= link_to 'Home', customers_path %>
+        </i>
+      </li>
+      <li>
+        <i class="fa fa-book" aria-hidden="true">
+          <%= link_to 'Customer Details', @customer %>
+        </i>
+      </li>
+      <li>
+        <i class="fa fa-phone" aria-hidden="true">
+          <%= link_to 'Log a Call', new_customer_call_log_path(@customer) %>
+        </i>
+      </li>
+    </ul>
+  </div>
+  <div class="col-md-8 col-md-offset-1 main">
+    <%= form_for([@customer, @appointment]) do |f| %>
+        <div class="row">
+          <% if @appointment.errors.any? %>
+              <div id="error_explanation">
+                <h2><%= pluralize(@appointment.errors.count, "error") %> prohibited this appointment from being
+                  saved:</h2>
 
-    <% if @appointment.errors.any? %>
-        <div id="error_explanation">
-          <h2><%= pluralize(@appointment.errors.count, "error") %> prohibited this appointment from being saved:</h2>
-
-          <ul>
-            <% @appointment.errors.full_messages.each do |message| %>
-                <li><%= message %></li>
-            <% end %>
-          </ul>
+                <ul>
+                  <% @appointment.errors.full_messages.each do |message| %>
+                      <li><%= message %></li>
+                  <% end %>
+                </ul>
+              </div>
+          <% end %>
         </div>
+
+        <div class="row">
+          <div class="field">
+            <div class="col-md-3">
+              <%= f.label :appointment %>
+            </div>
+            <div class="col-md-6">
+              <%= f.datetime_select :appointment, :order => [:month, :day, :year] %>
+            </div>
+          </div>
+        </div>
+
+
+        <div class="row">
+          <div class="field">
+            <div class="col-md-3">
+              <%= f.label :location %>
+            </div>
+            <div class="col-md-2">
+              <%= f.text_field :location %>
+            </div>
+          </div>
+        </div>
+
+
+        <div class="row">
+          <div class="col-sm-offset-5 col-md-2 ">
+            <div class="actions">
+              <%= f.submit %>
+            </div>
+          </div>
+        </div>
+
     <% end %>
 
-    <div class="field">
-      <%= f.label :appointment %>
-      <%= f.datetime_select :appointment, :order => [:month, :day, :year] %>
-    </div>
-
-    <div class="field">
-      <%= f.label :location %>
-      <%= f.text_field :location %>
-    </div>
+  </div>
+</div>
 
 
-    <div class="actions">
-      <%= f.submit %>
-    </div>
-<% end %>
+
+
+

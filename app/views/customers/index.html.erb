@@ -12,13 +12,14 @@
       </li>
       <li>
         <i class="fa fa-user" aria-hidden="true">
-          <%= link_to 'New Customer', new_customer_path %>
+          <%= link_to 'New Lead/Acct', new_customer_path %>
         </i>
       </li>
     </ul>
 
   </div>
 <div class="col-md-8 col-md-offset-1 main">
+  <p id="notice"><%= notice %></p>
   <div class="row">
     <div class="col-md-3">
       <strong>Name</strong>
@@ -34,10 +35,10 @@
       <div class="row">
         <div class="col-md-3"><%= customer.name %></div>
         <div class="col-md-2">
-          <% if customer.lead %>
-              <div>Lead</div>
-          <% else %>
+          <% if customer.account %>
               <div>Account</div>
+          <% else %>
+              <div>Lead</div>
           <% end %>
         </div>
         <div class="col-md-2 btn btn-default btn-xs"><%= link_to 'Info/Call/Appt', customer %></div>
@@ -46,4 +47,3 @@
   <% end %>
 </div>
 </div>
-<p id="notice"><%= notice %></p>

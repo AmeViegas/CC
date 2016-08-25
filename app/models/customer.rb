@@ -10,11 +10,13 @@ class Customer < ApplicationRecord
   validates_format_of :home_phone,
                       with: /\(\d{3}\) ?\d{3}( |-)?\d{4}|^\d{3}( |-)?\d{3}( |-)?\d{4}/i,
                       allow_blank:  true,
-                      message: "screwed up phone number"
+                      message: "Please correct home number"
 
   validates_format_of :cell_phone,
                       with: /\(\d{3}\) ?\d{3}( |-)?\d{4}|^\d{3}( |-)?\d{3}( |-)?\d{4}/i,
-                      :allow_blank => true
+                      :allow_blank => true,
+                      message: "Please correct cell number"
+
 
   validates :name,
             presence: true

@@ -1,7 +1,5 @@
-<p id="notice"><%= notice %></p>
-
 <div class="container">
-  <div class="row"><h1> Customer Details </h1></div>
+  <div class="row"><h1> Customer Details and History </h1></div>
 
   <div class="col-sm-3 col-md-2 sidebar">
     <ul class="nav nav-sidebar">
@@ -28,32 +26,50 @@
     </ul>
   </div>
   <div class="col-md-8 col-md-offset-1 main">
+    <p id="notice"><%= notice %></p>
     <div class="row">
-      <% if @customer.lead %>
+      <% if !@customer.account %>
           <div class="col-md-2 btn btn-default btn-xs pull-right">
             <%= link_to 'Convert to account', edit_customer_path(@customer) %>
           </div>
       <% end %>
     </div>
     <div class="row">
-      <strong>Name:</strong>
-      <%= @customer.name %>
+      <div class="col-md-3">
+        <strong>Name:</strong>
+      </div>
+      <div class="col-md-4">
+        <%= @customer.name %>
+      </div>
     </div>
     <div class="row">
-      <strong>Home phone:</strong>
-      <%= @customer.home_phone %>
+      <div class="col-md-3">
+        <strong>Home phone:</strong>
+      </div>
+      <div class="col-md-4">
+        <%= @customer.home_phone %>
+      </div>
     </div>
     <div class="row">
-      <strong>Cell phone:</strong>
-      <%= @customer.cell_phone %>
+      <div class="col-md-3">
+        <strong>Cell phone:</strong>
+      </div>
+      <div class="col-md-4">
+        <%= @customer.cell_phone %>
+      </div>
     </div>
     <div class="row">
-      <% if @customer.lead %>
-          <div> Currently a Lead</div>
+      <div class="col-md-3">
+      <strong> Cutomer status:</strong>
+        </div>
+      <div class="col-md-4">
+      <% if @customer.account %>
+          <div> Account</div>
 
       <% else %>
-          <div>Has a Account</div>
+          <div> Lead</div>
       <% end %>
+        </div>
     </div>
     <hr/>
     <div class="row">
@@ -68,7 +84,7 @@
             <strong> Staff</strong>
           </div>
           <div class="col-md-4">
-            <strong>  Notes / Comments</strong>
+            <strong> Notes / Comments</strong>
           </div>
 
         </div>
@@ -81,7 +97,7 @@
         <% end %>
     <% else %>
         <div class="row">
-          No call logs at this time
+          No call logs created
         </div>
     <% end %>
     <div class="row">
@@ -104,9 +120,9 @@
         <% end %>
     <% else %>
         <div class="row">
-          No appointments have been made or scheduled
+          No appointments created
         </div>
-  <% end %>
+    <% end %>
 
   </div>
 </div>
