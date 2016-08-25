@@ -1,43 +1,113 @@
 <p id="notice"><%= notice %></p>
 
-<%= link_to 'Edit', edit_customer_path(@customer) %> |
-<%= link_to 'Back', customers_path %>
-<td><%= link_to 'Log a Call', new_customer_call_log_path(@customer) %></td>
-<td><%= link_to 'Make an appointment', new_customer_appointment_path(@customer) %></td>
+<div class="container">
+  <div class="row"><h1> Customer Details </h1></div>
 
+  <div class="col-sm-3 col-md-2 sidebar">
+    <ul class="nav nav-sidebar">
 
-<p>
-  <strong>Name:</strong>
-  <%= @customer.name %>
-</p>
+      <li>
+        <i class="fa fa-home" aria-hidden="true">
+          <%= link_to 'Home', customers_path %>
+        </i>
+      </li>
+      <li><i class="fa fa-pencil-square-o" aria-hidden="true">
+        <%= link_to 'Edit customer', edit_customer_path(@customer) %>
+      </i>
+      </li>
+      <li>
+        <i class="fa fa-phone" aria-hidden="true">
+          <%= link_to 'Log a Call', new_customer_call_log_path(@customer) %>
+        </i>
+      </li>
+      <li>
+        <i class="fa fa-calendar" aria-hidden="true">
+          <%= link_to 'Make an appointment', new_customer_appointment_path(@customer) %>
+        </i>
+      </li>
+    </ul>
+  </div>
+  <div class="col-md-8 col-md-offset-1 main">
+    <div class="row">
+      <% if @customer.lead %>
+          <div class="col-md-2 btn btn-default btn-xs pull-right">
+            <%= link_to 'Convert to account', edit_customer_path(@customer) %>
+          </div>
+      <% end %>
+    </div>
+    <div class="row">
+      <strong>Name:</strong>
+      <%= @customer.name %>
+    </div>
+    <div class="row">
+      <strong>Home phone:</strong>
+      <%= @customer.home_phone %>
+    </div>
+    <div class="row">
+      <strong>Cell phone:</strong>
+      <%= @customer.cell_phone %>
+    </div>
+    <div class="row">
+      <% if @customer.lead %>
+          <div> Currently a Lead</div>
 
-<p>
-  <strong>Home phone:</strong>
-  <%= @customer.home_phone %>
-</p>
+      <% else %>
+          <div>Has a Account</div>
+      <% end %>
+    </div>
+    <hr/>
+    <div class="row">
+      <h3>Call Logs</h3>
+    </div>
+    <% if @customer.call_logs.exists? %>
+        <div class="row">
+          <div class="col-md-3">
+            <strong> Date Called</strong>
+          </div>
+          <div class="col-md-3">
+            <strong> Staff</strong>
+          </div>
+          <div class="col-md-4">
+            <strong>  Notes / Comments</strong>
+          </div>
 
-<p>
-  <strong>Cell phone:</strong>
-  <%= @customer.cell_phone %>
-</p>
-<% if @customer.lead %>
-    <div>Lead
-    <%= link_to 'Convert to account', edit_customer_path(@customer)%> </div>
-<% else %>
-    <div>Account</div>
-<% end %>
+        </div>
+        <% @customer.call_logs.each do |call_log| %>
+            <div class="row">
+              <div class="col-md-3"><%= formatted_date(call_log.calldate) %></div>
+              <div class="col-md-3"><%= call_log.caller %> </div>
+              <div class="col-md-4"><%= call_log.comments %> </div>
+            </div>
+        <% end %>
+    <% else %>
+        <div class="row">
+          No call logs at this time
+        </div>
+    <% end %>
+    <div class="row">
+      <h3>Appointments</h3>
+    </div>
+    <% if @customer.appointments.exists? %>
+        <div class="row">
+          <div class="col-md-3">
+            <strong>Appointment Date</strong>
+          </div>
+          <div class="col-md-3">
+            <strong> Location</strong>
+          </div>
+        </div>
+        <% @customer.appointments.each do |appt| %>
+            <div class="row">
+              <div class="col-md-3"><%= formatted_date_time (appt.appointment) %></div>
+              <div class="col-md-3"><%= appt.location %></div>
+            </div>
+        <% end %>
+    <% else %>
+        <div class="row">
+          No appointments have been made or scheduled
+        </div>
+  <% end %>
 
+  </div>
+</div>
 
-
-<h2>Call Logs</h2>
-<% @customer.call_logs.each do |call_log| %>
-  <p><%=call_log.calldate %></p>
-    <p><%=call_log.caller %></p>
-    <p><%=call_log.comments %></p>
-<% end %>
-
-<h2>Appointments</h2>
-<% @customer.appointments.each do |appt| %>
-    <p><%=appt.appointment %></p>
-    <p><%=appt.location %></p>
-<% end %>

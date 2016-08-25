@@ -1,12 +1,32 @@
-<h1>Editing
-  <% if @customer.lead %>
-      Lead
-  <%else%>
-      Account
-  <% end %>
-</h1>
+<div class="container">
+  <div class="row"><h1> Edit Customer </h1></div>
+  <div class="col-sm-3 col-md-2 sidebar">
+    <ul class="nav nav-sidebar">
 
-<%= form_for(@customer) do |f| %>
+      <li>
+        <i class="fa fa-home" aria-hidden="true">
+          <%= link_to 'Home', customers_path %>
+        </i>
+      </li>
+      <li>
+        <i class="fa fa-book" aria-hidden="true">
+          <%= link_to 'Customer Details', @customer %> 
+        </i>
+      </li>
+      <li>
+        <i class="fa fa-phone" aria-hidden="true">
+          <%= link_to 'Log a Call', new_customer_call_log_path(@customer) %>
+        </i>
+      </li>
+      <li>
+        <i class="fa fa-calendar" aria-hidden="true">
+          <%= link_to 'Make an appointment', new_customer_appointment_path(@customer) %>
+        </i>
+      </li>
+    </ul>
+  </div>
+  <%= form_for(@customer) do |f| %>
+  <div class="row">
     <% if @customer.errors.any? %>
         <div id="error_explanation">
           <h2><%= pluralize(@customer.errors.count, "error") %> prohibited this customer from being saved:</h2>
@@ -18,6 +38,15 @@
           </ul>
         </div>
     <% end %>
+  </div>
+  <div class="row">
+
+  </div>
+</div>
+
+
+
+
 
     <div class="field">
       <%= f.label :name %>
@@ -47,5 +76,5 @@
 <% end %>
 
 
-<%= link_to 'Show', @customer %> |
+
 <%= link_to 'Back', customers_path %>
