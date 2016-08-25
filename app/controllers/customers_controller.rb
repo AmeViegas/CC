@@ -35,7 +35,7 @@ class CustomersController < ApplicationController
   # PATCH/PUT /customers/1
   def update
     @customer = Customer.find(params[:id])
-      if @customer.update_attributes(customer_params)
+      if @customer.update(customer_params)
        redirect_to @customer, notice: 'Contact was successfully updated.'
       else
         render :edit
@@ -57,7 +57,7 @@ class CustomersController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def customer_params
-      params.require(:customer).permit(:name, :home_phone, :cell_phone, :lead)
+      params.require(:customer).permit(:name, :home_phone, :cell_phone, :account)
     end
 
 end
